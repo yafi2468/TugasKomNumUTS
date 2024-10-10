@@ -1,6 +1,6 @@
-# ** KOMNUM- KELOMPOK 1 **
+# ** KOMNUM-KELOMPOK-1 **
 
-Penyelesaian Persamaan Non Linier dengan Metode Tabel yang diimplementasikan menggunakan code python.
+Penyelesaian Persamaan Non Linier dengan Metode Tabel 
 
 ## ** Anggota Kelompok: **
 - ** AFFAN SUHENDAR (2308107010003) **
