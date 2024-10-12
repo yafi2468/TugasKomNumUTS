@@ -1,29 +1,60 @@
-def fungsi(x):
-    return x ** 3 - 3*x + 7
+import re
+import math
 
+def Intro():
+    print("\n +------------------------+")
+    print(" |      Metode Tabel      |")
+    print(" +------------------------+\n")
 
-# Input
-Batas_Bawah = float(input("Batas Bawah : "))
-Batas_Atas  = float(input("Batas Atas  : "))
-Iterasi_Maksimum = float(input("Iterasi Maksimum : "))
+def f(x):
+    pass
 
-Iterasi = 0
+Intro()
+
+#Input
+Fungsi = input(" Masukkan Fungsi  : ")
+Batas_Bawah = int(input(" Batas bawah      : "))
+Batas_Atas = int(input(" Batas atas       : "))
+Iterasi_Maksimum = int(input(" Iterasi Maksimum : "))
+
+# Kebutuhan sistem
 h = (Batas_Atas - Batas_Bawah) / Iterasi_Maksimum
-hasil = 0
+Fungsi = Fungsi.replace('E', 'e').replace('X','x')
+Fungsi = re.sub(r'\s+', '', Fungsi)
+Fungsi = re.sub(r'(\d+)(x)', r'\1*\2', Fungsi)
+Fungsi = re.sub(r'e\^([a-zA-Z0-9]+)', r'math.exp(\1)', Fungsi)
 
-while (Iterasi<=Iterasi_Maksimum and Batas_Bawah<Batas_Atas):
-    x = Batas_Atas+(Iterasi*h)
-    f_x1 = fungsi(x)
-    f_x2 = fungsi(x+1)
+# Definisikan fungsi dengan exec
+Fungsi_Baru = f"""
+def f(x):
+    return {Fungsi}
+"""
+exec(Fungsi_Baru)
 
-    if f_x1 == 0:
-        hasil = x
+# Header tabel
+print("\n +----------+----------+-------------+-------------+---------------------+")
+print(" | Iterasi  |    xi    |    f(xi)    |  f(x(i+1))  |  f(xi)*f(x(i+1))    |")
+print(" +----------+----------+-------------+-------------+---------------------+")
 
-    elif f_x1 * f_x2 < 0 :
-        if abs(f_x1) < abs (f_x2):
-            hasil = x
-        else :
-            hasil = x+1
+# Operasi
+Iterasi = 0
+while Iterasi <= Iterasi_Maksimum:
+    xi = Batas_Bawah + Iterasi * h
+    xi_1 = Batas_Bawah + (Iterasi + 1) * h
     
-    print(Iterasi, x , f_x1)
-    Iterasi +=1
+    f_xi = f(xi)
+    f_xi_1 = f(xi_1)
+
+    if Iterasi == Iterasi_Maksimum:
+        print(f" | {Iterasi:<8} | {xi:<8.4f} | {f_xi:<11.4f} |")
+        print(" +----------+----------+-------------+")
+        break
+
+    f_xi__f_xi_1 = f_xi * f_xi_1
+    
+    print(f" | {Iterasi:<8} | {xi:<8.4f} | {f_xi:<11.4f} | {f_xi_1:<11.4f} | {f_xi__f_xi_1:<19.4f} |")
+    print(" +----------+----------+-------------+-------------+---------------------+")
+    
+    Iterasi += 1
+
+
