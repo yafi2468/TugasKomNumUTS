@@ -37,6 +37,8 @@ print(" | Iterasi  |    xi    |    f(xi)    |  f(x(i+1))  |  f(xi)*f(x(i+1))    
 print(" +----------+----------+-------------+-------------+---------------------+")
 
 # Operasi
+xi_values = []
+f_xi_values = []
 Iterasi = 0
 while Iterasi <= Iterasi_Maksimum:
     xi = Batas_Bawah + Iterasi * h
@@ -44,6 +46,9 @@ while Iterasi <= Iterasi_Maksimum:
     
     f_xi = f(xi)
     f_xi_1 = f(xi_1)
+
+    xi_values.append(xi)
+    f_xi_values.append(f_xi)
 
     if Iterasi == Iterasi_Maksimum:
         print(f" | {Iterasi:<8} | {xi:<8.4f} | {f_xi:<11.4f} |")
