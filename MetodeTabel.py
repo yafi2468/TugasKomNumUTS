@@ -1,5 +1,8 @@
 import re
 import math
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.widgets import Slider
 
 def Intro():
     print("\n +------------------------+")
@@ -61,5 +64,41 @@ while Iterasi <= Iterasi_Maksimum:
     print(" +----------+----------+-------------+-------------+---------------------+")
     
     Iterasi += 1
+    # Plotting
+fig, ax = plt.subplots()
+line, = plt.plot(xi_values, f_xi_values)  # Save reference to the plotted line
+plt.xlabel('xi')
+plt.ylabel('f(xi)')
+plt.title('Metode Tabel')   
+
+# Add slider for interactive plot
+axcolor = 'lightgoldenrodyellow'
+ax_h = plt.axes([0.25, .03, 0.50, 0.02], facecolor=axcolor)
+h_slider = Slider(ax_h, 'h', 0.1, 10.0, valinit=h)
+
+def update(val):
+    h = h_slider.val
+    xi_values = []
+    f_xi_values = []
+    Iterasi = 0
+    while Iterasi <= Iterasi_Maksimum:
+        xi = Batas_Bawah + Iterasi * h
+        f_xi = f(xi)
+        xi_values.append(xi)
+        f_xi_values.append(f_xi)
+        Iterasi += 1
+
+    # Update the plot with new values
+    line.set_xdata(xi_values)
+    line.set_ydata(f_xi_values)
+    ax.relim()  # Recalculate limits
+    ax.autoscale_view()  # Rescale the view
+    fig.canvas.draw_idle()  # Redraw the figure
+
+# Connect the slider to the update function
+h_slider.on_changed(update)
+
+# Show the plot
+plt.show()
 
 
