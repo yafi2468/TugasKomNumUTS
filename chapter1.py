@@ -50,7 +50,7 @@ for i in range(N):
             hasil = x_val
         else:
             hasil = x_val + h
-    st.write("iterasi", i, "akar ", fx1, "fx(i+1)", fx2, "fx(i) * fx(i+1)", fx3)
+    st.write("iterasi", i,"akar", x_val, "fx1 ", fx1, "fx(i+1)", fx2, "fx(i) * fx(i+1)", fx3)
     bar.progress((i + 1) / N)
     time.sleep(0.5)
 
