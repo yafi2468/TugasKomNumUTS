@@ -12,7 +12,7 @@ def f(x):
 Intro()
 
 #Input
-Fungsi = input(" Masukkan Fungsi  : ")
+Fungsi = (input(" Masukkan Fungsi  : "))
 Batas_Bawah = int(input(" Batas bawah      : "))
 Batas_Atas = int(input(" Batas atas       : "))
 Iterasi_Maksimum = int(input(" Iterasi Maksimum : "))
@@ -20,10 +20,11 @@ Iterasi_Maksimum = int(input(" Iterasi Maksimum : "))
 # Kebutuhan sistem
 h = (Batas_Atas - Batas_Bawah) / Iterasi_Maksimum
 Fungsi = Fungsi.replace('E', 'e').replace('X','x')
+Fungsi = Fungsi.replace('e', '2.718281828')
+Fungsi = Fungsi.replace('^', '**')
 Fungsi = re.sub(r'\s+', '', Fungsi)
 Fungsi = re.sub(r'(\d+)(x)', r'\1*\2', Fungsi)
-Fungsi = re.sub(r'e\^([a-zA-Z0-9]+)', r'math.exp(\1)', Fungsi)
-
+print(Fungsi)
 # Definisikan fungsi dengan exec
 Fungsi_Baru = f"""
 def f(x):
@@ -40,9 +41,11 @@ print(" +----------+----------+-------------+-------------+---------------------
 Iterasi = 0
 while Iterasi <= Iterasi_Maksimum:
     xi = Batas_Bawah + Iterasi * h
+    print(xi)
     xi_1 = Batas_Bawah + (Iterasi + 1) * h
     
     f_xi = f(xi)
+    print(f_xi)
     f_xi_1 = f(xi_1)
 
     if Iterasi == Iterasi_Maksimum:
